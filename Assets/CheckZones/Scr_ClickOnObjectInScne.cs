@@ -91,20 +91,16 @@ public class Scr_ClickOnObjectInScne : MonoBehaviour
     public void AttackMode(int capacite)
     {
         mode = Mode.Capa;
-        //actualCapa = capaciteManager.attackCapa[capacite];
-        //actualCapa = dataBase.capa[capacite].attackCapa[capacite;
-        //Debug.Log(capaciteManager.capacite[capacite].intCapa);
 
-        //actualCapa = dataBase.capa[capaciteManager.capacite[capacite].intCapa];
         int capaDizaines = capacite / 10;
         int capaUnites = capacite - capaDizaines * 10;
+        /*
         Debug.Log(capaDizaines);
         Debug.Log(capaUnites);
+        */
 
         actualCapa = dataBase.capa[capaciteManager.capacite[capaDizaines].intCapa].attackCapa[capaUnites];
-
-        //Debug.Log(capacite);
-        Debug.Log(actualCapa.name);
+        Debug.Log("Capacité actuelle:  "+actualCapa.name);
         Activation();
 
     }
