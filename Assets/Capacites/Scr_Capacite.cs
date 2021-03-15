@@ -8,11 +8,13 @@ using UnityEngine.UI;
 public class Scr_Capacite
 {
     public Text uiCapaText;
+    public Text[] uiCapaAltText;
     public int intCapa;
 
-    public Scr_Capacite(string nom, Text uiCapaText,int intCapa)
+    public Scr_Capacite(string nom, Text uiCapaText,Text[] uiCapaAltText, int intCapa)
     {
         this.uiCapaText = uiCapaText;
+        this.uiCapaAltText = uiCapaAltText;
         this.intCapa = intCapa;
 
     }

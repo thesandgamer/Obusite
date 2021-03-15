@@ -6,6 +6,7 @@ public class Scr_EnnemiAi : MonoBehaviour
 {
     private Scr_MovePositions posManager;
     private Scr_Capa capaManager;
+    private Scr_CapaDataBase dataBase;
     private Scr_Attaque attaqueManager;
 
     public GameObject player;
@@ -15,6 +16,7 @@ public class Scr_EnnemiAi : MonoBehaviour
         posManager = GetComponent<Scr_MovePositions>();
         capaManager = GetComponent<Scr_Capa>();
         attaqueManager = GetComponent<Scr_Attaque>();
+        dataBase = FindObjectOfType<Scr_CapaDataBase>();
     }
 
 
@@ -33,7 +35,7 @@ public class Scr_EnnemiAi : MonoBehaviour
 
     public void Attack()
     {
-        attaqueManager.CalculateIfMakeDamages(player, capaManager.attackCapa[0],posManager.actualPosition,"Head") ;
+        attaqueManager.CalculateIfMakeDamages(player, dataBase.capa[0].attackCapa[0],posManager.actualPosition,"Head") ;
 
     }
 

@@ -47,7 +47,9 @@ public class Scr_TurnManager : MonoBehaviour
         enemy[0].GetComponent<Scr_MovePositions>().SetPos(position.GetComponent<Scr_PositionsManager>().ennemiPositions);
         //Active l'Ui
         battleUi.SetActive(true);
-
+        //Desactive l'encounter
+        var collide = transform.parent.gameObject.GetComponent<SphereCollider>();
+        collide.enabled = false;
 
         Debug.Log("Battle Start");
         state = BattleState.PLAYERTURN;

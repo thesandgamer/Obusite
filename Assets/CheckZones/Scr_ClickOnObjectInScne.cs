@@ -29,6 +29,7 @@ public class Scr_ClickOnObjectInScne : MonoBehaviour
     private Scr_MovePositions posManager;
     private Scr_Attaque attaqueManager;
     private Scr_Capa capaciteManager;
+    public Scr_CapaDataBase dataBase;
 
     private int actionsMax = 2;
     private int actionsRestantes;
@@ -85,12 +86,27 @@ public class Scr_ClickOnObjectInScne : MonoBehaviour
 
     }
 
+
+
     public void AttackMode(int capacite)
     {
         mode = Mode.Capa;
-        actualCapa = capaciteManager.attackCapa[capacite];
-        //Debug.Log(actualCapa.name);
+        //actualCapa = capaciteManager.attackCapa[capacite];
+        //actualCapa = dataBase.capa[capacite].attackCapa[capacite;
+        //Debug.Log(capaciteManager.capacite[capacite].intCapa);
+
+        //actualCapa = dataBase.capa[capaciteManager.capacite[capacite].intCapa];
+        int capaDizaines = capacite / 10;
+        int capaUnites = capacite - capaDizaines * 10;
+        Debug.Log(capaDizaines);
+        Debug.Log(capaUnites);
+
+        actualCapa = dataBase.capa[capaciteManager.capacite[capaDizaines].intCapa].attackCapa[capaUnites];
+
+        //Debug.Log(capacite);
+        Debug.Log(actualCapa.name);
         Activation();
+
     }
 
 

@@ -14,8 +14,8 @@ public class Scr_AttackCapa
     public int nbCibles;
     public int touche;
     public int[] degats;
-    //public Effet effet;
     public UnityEvent effet;
+
 
     public Scr_AttackCapa(string name, Sprite icone, bool[] portee, int[] modifPortee,int nbCibles,int touche, int[] degats,UnityEvent effet)
     {
