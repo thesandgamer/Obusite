@@ -5,9 +5,11 @@ using UnityEngine.UI;
 
 public class Scr_Capa : MonoBehaviour
 {
-    public Scr_AttackCapa[] attackCapa;
 
-    public Text textCapa1;
+
+    public Scr_CapaDataBase capaDataBase;
+    public Scr_Capacite[] capacite;
+
 
     private void Start()
     {
@@ -16,16 +18,18 @@ public class Scr_Capa : MonoBehaviour
 
     void InitUi()
     {
-        if (textCapa1 != null)
+        for(int i = 0; i < capaDataBase.capa.Length; i++)
         {
-            textCapa1.text = attackCapa[0].name;
+            
+            if (capacite[i].uiCapaText != null)
+            {
+                capacite[i].uiCapaText.text = capaDataBase.capa[capacite[i].intCapa].name;
+            }
+            
         }
 
-    }
+        
 
-    public void Attack(int capacite)
-    {
-        attackCapa[capacite].Active();
     }
 
 

@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.Events;
 
 
-
 [System.Serializable]
 public class Scr_AttackCapa
 {
