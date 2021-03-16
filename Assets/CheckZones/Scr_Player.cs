@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Scr_Player : MonoBehaviour
 {
-    public int esquive = 0;
     public int moral = 10;
 
     private int moralMax = 20;

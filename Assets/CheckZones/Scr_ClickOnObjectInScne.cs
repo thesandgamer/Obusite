@@ -29,6 +29,7 @@ public class Scr_ClickOnObjectInScne : MonoBehaviour
     private Scr_MovePositions posManager;
     private Scr_Attaque attaqueManager;
     private Scr_Capa capaciteManager;
+    private Scr_Player playerManager;
     public Scr_CapaDataBase dataBase;
 
     private int actionsMax = 2;
@@ -45,6 +46,7 @@ public class Scr_ClickOnObjectInScne : MonoBehaviour
         attaqueManager = GetComponent<Scr_Attaque>();
         capaciteManager = GetComponent<Scr_Capa>();
         posManager = GetComponent<Scr_MovePositions>();
+        playerManager = GetComponent<Scr_Player>();
         mode = Mode.Aucun;
     }
 
@@ -99,7 +101,7 @@ public class Scr_ClickOnObjectInScne : MonoBehaviour
         Debug.Log(capaUnites);
         */
 
-        actualCapa = dataBase.capa[capaciteManager.capacite[capaDizaines].intCapa].attackCapa[capaUnites];
+        actualCapa = dataBase.AttackCapa[capaciteManager.capacite[capaDizaines].intCapa].attackCapa[capaUnites];
         Debug.Log("Capacité actuelle:  "+actualCapa.name);
         Activation();
 
@@ -118,8 +120,7 @@ public class Scr_ClickOnObjectInScne : MonoBehaviour
                 }
                 if (hitObject.CompareTag("Ennemi"))
                 {
-                    //Debug.Log("Ennemi");
-                    
+                    Debug.Log("Ennemi");
                 }
                 break;
 
@@ -143,21 +144,28 @@ public class Scr_ClickOnObjectInScne : MonoBehaviour
                 if (hitObject.CompareTag("Ennemi"))
                 {
                     //Check si le perso est à la bonne place pour faire son attaque
-                    bool valide = false;
+                    bool porteeValide = false;
                     for (int i = 0; i < 4; i++)
                     {
                         if (posManager.actualPosition == posManager.pos[i])
                         {
                             if (actualCapa.portee[i] == true)
                             {
-                                valide = true;
+                                porteeValide = true;
                             }
                         }
                     }
 
-                    Debug.Log(valide);
+                    bool moralValide = false;
+                    if (playerManager.moral >= actualCapa.moralRequire)
+                    {
+                        moralValide = true;
+                    }
+
+                    Debug.Log("La portées est valide? " + porteeValide);
+                    Debug.Log("Le moral est valide? " + moralValide);
                     
-                    if (valide)
+                    if (porteeValide && moralValide)
                     {
                         Debug.Log(hitObject.name);
                         var ennemi = hitObject.transform.parent.GetComponent<Scr_Ennemi>();

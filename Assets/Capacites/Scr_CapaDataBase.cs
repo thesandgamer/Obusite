@@ -4,5 +4,6 @@ using UnityEngine;
 
 public class Scr_CapaDataBase : MonoBehaviour
 {
-    public Scr_CapaAll[] capa;
+    public Scr_CapaAll[] AttackCapa;
+    public Scr_CapaAllAuto[] AutoCapa;
 }

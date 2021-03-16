@@ -17,7 +17,7 @@ public class Scr_Attaque : MonoBehaviour
 
     public void CalculateIfMakeDamages(GameObject opponent, Scr_AttackCapa capacite, Transform selfPos, string part)
     {
-
+        /*
         if (opponent.GetComponent<Scr_Ennemi>())
         {
             var ennemi = opponent.GetComponent<Scr_Ennemi>();
@@ -27,6 +27,12 @@ public class Scr_Attaque : MonoBehaviour
         {
            var ennemi = opponent.GetComponent<Scr_Player>();
            int esquive = ennemi.esquive;
+        }
+        */
+        if (opponent.GetComponent<Scr_TakeDamages>())
+        {
+            var ennemi = opponent.GetComponent<Scr_TakeDamages>();
+            int esquive = ennemi.esquive;
         }
 
         int toReach = capacite.touche;

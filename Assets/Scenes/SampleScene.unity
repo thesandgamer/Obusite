@@ -3465,6 +3465,7 @@ GameObject:
   - component: {fileID: 1516608935}
   - component: {fileID: 1516608936}
   - component: {fileID: 1516608937}
+  - component: {fileID: 1516608933}
   m_Layer: 6
   m_Name: PlayerManagerCombat
   m_TagString: Player
@@ -3495,6 +3496,7 @@ MonoBehaviour:
   actualCapa:
     name: 
     icone: {fileID: 0}
+    moralRequire: 0
     portee: 
     modifPortee: 
     nbCibles: 0
@@ -3517,6 +3519,20 @@ Transform:
   m_Father: {fileID: 1032976136}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1516608933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1516608930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78229848ffd431d4fbbcfa25599d1304, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  esquive: 0
+  moral: 10
 --- !u!114 &1516608934
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3555,13 +3571,13 @@ MonoBehaviour:
     - {fileID: 801621264}
     - {fileID: 92928224}
     - {fileID: 1136436408}
-    intCapa: 1
+    intCapa: 0
   - uiCapaText: {fileID: 364758973}
     uiCapaAltText:
     - {fileID: 383443578}
     - {fileID: 2112545167}
     - {fileID: 1411980993}
-    intCapa: 0
+    intCapa: 1
 --- !u!114 &1516608936
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3649,68 +3665,84 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b19d7f80a78d354ba3d2d73f77112ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  capa:
-  - name: "Tir de Pr\xE9cision"
+  AttackCapa:
+  - name: Coup de bayonette
     attackCapa:
-    - name: Tir calme
+    - name: "Evic\xE9ration"
       icone: {fileID: 0}
-      portee: 00010101
-      modifPortee: 00000000f6ffffff0000000000000000
-      nbCibles: 0
-      touche: 0
-      degats: 0200000003000000
+      moralRequire: 20
+      portee: 01000000
+      modifPortee: 00000000000000000000000000000000
+      nbCibles: 1
+      touche: 60
+      degats: 0400000006000000
+      effet:
+        m_PersistentCalls:
+          m_Calls: []
+    - name: Poignardage
+      icone: {fileID: 0}
+      moralRequire: 10
+      portee: 01000000
+      modifPortee: 00000000000000000000000000000000
+      nbCibles: 1
+      touche: 60
+      degats: 0300000004000000
+      effet:
+        m_PersistentCalls:
+          m_Calls: []
+    - name: Efleurement
+      icone: {fileID: 0}
+      moralRequire: 5
+      portee: 01000000
+      modifPortee: 00000000000000000000000000000000
+      nbCibles: 1
+      touche: 60
+      degats: 0100000002000000
+      effet:
+        m_PersistentCalls:
+          m_Calls: []
+  - name: "Tir de pr\xE9cision"
+    attackCapa:
+    - name: Tir Fort
+      icone: {fileID: 0}
+      moralRequire: 20
+      portee: 01000000
+      modifPortee: 00000000000000000000000000000000
+      nbCibles: 1
+      touche: 60
+      degats: 0400000006000000
       effet:
         m_PersistentCalls:
           m_Calls: []
     - name: Tir normal
       icone: {fileID: 0}
-      portee: 00000000
+      moralRequire: 10
+      portee: 01000000
       modifPortee: 00000000000000000000000000000000
-      nbCibles: 0
-      touche: 0
-      degats: 0000000000000000
+      nbCibles: 1
+      touche: 60
+      degats: 0300000004000000
       effet:
         m_PersistentCalls:
           m_Calls: []
-    - name: Tir violent
+    - name: Tir faible
       icone: {fileID: 0}
-      portee: 00000000
+      moralRequire: 5
+      portee: 01000000
       modifPortee: 00000000000000000000000000000000
-      nbCibles: 0
-      touche: 0
-      degats: 0000000000000000
+      nbCibles: 1
+      touche: 60
+      degats: 0100000002000000
       effet:
         m_PersistentCalls:
           m_Calls: []
-  - name: Coup Bayonette
-    attackCapa:
-    - name: Egorgement
+  AutoCapa:
+  - name: Gain moral
+    autoCapa:
+    - name: Auto admiration
       icone: {fileID: 0}
-      portee: 
-      modifPortee: 
-      nbCibles: 0
-      touche: 0
-      degats: 
-      effet:
-        m_PersistentCalls:
-          m_Calls: []
-    - name: Coup surin
-      icone: {fileID: 0}
-      portee: 
-      modifPortee: 
-      nbCibles: 0
-      touche: 0
-      degats: 
-      effet:
-        m_PersistentCalls:
-          m_Calls: []
-    - name: Taillade
-      icone: {fileID: 0}
-      portee: 
-      modifPortee: 
-      nbCibles: 0
-      touche: 0
-      degats: 
+      moralRequire: 0
+      touche: 100
       effet:
         m_PersistentCalls:
           m_Calls: []

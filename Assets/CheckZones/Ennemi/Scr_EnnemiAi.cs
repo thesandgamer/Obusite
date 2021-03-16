@@ -35,7 +35,7 @@ public class Scr_EnnemiAi : MonoBehaviour
 
     public void Attack()
     {
-        attaqueManager.CalculateIfMakeDamages(player, dataBase.capa[0].attackCapa[0],posManager.actualPosition,"Head") ;
+        attaqueManager.CalculateIfMakeDamages(player, dataBase.AttackCapa[0].attackCapa[0],posManager.actualPosition,"Head") ;
 
     }
 
