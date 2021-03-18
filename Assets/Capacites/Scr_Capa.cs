@@ -20,8 +20,8 @@ public class Scr_Capa : MonoBehaviour
     {
 
         
-        for (int i = 0; i< capacite.Length; i++)
-        { 
+        for (int i = 0; i < capacite.Length; i++)
+        {
             for (int j = 0; j < capaDataBase.AttackCapa[capacite[i].intCapa].attackCapa.Length; j++)
             {
                 /*
@@ -29,6 +29,9 @@ public class Scr_Capa : MonoBehaviour
                 Debug.Log("capa variation : " + capaDataBase.capa[i].attackCapa[j].name + " numéro " + j);
                 Debug.Log("capa : " + capaDataBase.capa[i].name);
                 */
+
+                //Debug.Log("Capa: " + capaDataBase.AutoCapa[capacite[i].intCapa].name);
+
                 if (capacite[i].uiCapaText)
                 {
                     capacite[i].uiCapaText.text = capaDataBase.AttackCapa[capacite[i].intCapa].name;
@@ -36,19 +39,44 @@ public class Scr_Capa : MonoBehaviour
                 if (capacite[i].uiCapaAltText[j])
                 {
                     capacite[i].uiCapaAltText[j].text = capaDataBase.AttackCapa[capacite[i].intCapa].attackCapa[j].name;
-                }     
-                
-            }
+                }
 
-            
-            
+            }
         }
 
+
+        for (int i = 0; i < capacite.Length; i++)
+        {
+            for (int j = 0; j < capaDataBase.AutoCapa[capacite[i].intCapa].autoCapa.Length; j++)
+            {
+                /*
+                Debug.Log("capa : " + capaDataBase.capa[i].name);
+                Debug.Log("capa variation : " + capaDataBase.capa[i].attackCapa[j].name + " numéro " + j);
+                Debug.Log("capa : " + capaDataBase.capa[i].name);
+                */
+                //Debug.Log("Capa: " + capaDataBase.AutoCapa[capacite[i].intCapa].name);
+
+                if (capacite[i].uiCapaText)
+                {
+                    capacite[i].uiCapaText.text = capaDataBase.AutoCapa[capacite[i].intCapa].name;
+                }
+                if (capacite[i].uiCapaAltText[j])
+                {
+                    capacite[i].uiCapaAltText[j].text = capaDataBase.AutoCapa[capacite[i].intCapa].autoCapa[j].name;
+                }
+
+            }
+
+
+
+
+        }
+
+
+
+
+
+
     }
-
-
-    
-
-
 
 }

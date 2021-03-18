@@ -18,6 +18,11 @@ public class Scr_Effets : MonoBehaviour
 
     }
 
+    public void GainMoral(int value)
+    {
+        Debug.Log("Gain moral : " + value);
+    }
+
 
 
 }
