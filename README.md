@@ -1,1 +1,1 @@
-# Obusite / Shell-shock / Shell-fall
+# Idées nom: Obusite / Shell-shock / Shell-fall
