@@ -29,6 +29,7 @@ public class Scr_Attaque : MonoBehaviour
            int esquive = ennemi.esquive;
         }
         */
+
         if (opponent.GetComponent<Scr_TakeDamages>())
         {
             var ennemi = opponent.GetComponent<Scr_TakeDamages>();
@@ -83,4 +84,21 @@ public class Scr_Attaque : MonoBehaviour
         }
         
     }
+
+    public void CalculateIfTouch(GameObject cible, Scr_AutoCapa capacite)
+    {
+        int toReach = capacite.touche;
+        int value = Random.Range(1, 100);
+
+        if (value <= toReach)
+        {
+            effets.cible = cible;
+            capacite.effet.Invoke();
+        }
+
+
+
+    }
+
+
 }

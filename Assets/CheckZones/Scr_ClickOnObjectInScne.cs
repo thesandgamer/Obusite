@@ -36,7 +36,8 @@ public class Scr_ClickOnObjectInScne : MonoBehaviour
     private int actionsRestantes;
 
     [HideInInspector] public Scr_AttackCapa actualCapa;
-    
+    [HideInInspector] public Scr_AutoCapa actualAutoCapa;
+
 
 
     private void Start()
@@ -94,15 +95,38 @@ public class Scr_ClickOnObjectInScne : MonoBehaviour
     {
         mode = Mode.Capa;
 
-        int capaDizaines = capacite / 10;
-        int capaUnites = capacite - capaDizaines * 10;
+        int capaCentaines = capacite / 100;
+        int capaDizaines = (capacite - (capaCentaines * 100)) / 10;
+        int capaUnites = capacite - (capaCentaines * 100) - (capaDizaines * 10);
+        
         /*
-        Debug.Log(capaDizaines);
-        Debug.Log(capaUnites);
+        Debug.Log("Centaines : " + capaCentaines);
+        Debug.Log("Dizaines : " + capaDizaines);
+        Debug.Log("Unité : " + capaUnites);
         */
 
-        actualCapa = dataBase.AttackCapa[capaciteManager.capacite[capaDizaines].intCapa].attackCapa[capaUnites];
-        Debug.Log("Capacité actuelle:  "+actualCapa.name);
+        switch (capaCentaines)
+        {
+            case 0:
+                    actualCapa = dataBase.AttackCapa[capaciteManager.capacite[capaDizaines].intCapa].attackCapa[capaUnites];
+                    actualAutoCapa = null ;
+                    Debug.Log("Capacité actuelle:  " + actualCapa.name);
+                break;
+
+            case 1:
+                    actualAutoCapa = dataBase.AutoCapa[capaciteManager.capacite[capaDizaines].intCapa].autoCapa[capaUnites];
+                    actualCapa = null;
+                    Debug.Log("Capacité actuelle:  " + actualAutoCapa.name);
+                break;
+                
+                
+
+            default:
+                break;
+
+        }
+        
+        
         Activation();
 
     }
@@ -141,7 +165,7 @@ public class Scr_ClickOnObjectInScne : MonoBehaviour
                 if (hitObject == null)
                     break;
  
-                if (hitObject.CompareTag("Ennemi"))
+                if (hitObject.CompareTag("Ennemi") && actualCapa != null)
                 {
                     //Check si le perso est à la bonne place pour faire son attaque
                     bool porteeValide = false;
@@ -181,12 +205,46 @@ public class Scr_ClickOnObjectInScne : MonoBehaviour
                         mode = Mode.Aucun;
                     }
                 }
-                break;
+
+                if (hitObject.CompareTag("Player") && actualAutoCapa != null)
+                {
+
+                    bool moralValide = false;
+                    if (playerManager.moral >= actualAutoCapa.moralRequire)
+                    {
+                        moralValide = true;
+                    }
+
+
+                    if (moralValide)
+                    {
+                        attaqueManager.CalculateIfTouch(hitObject.gameObject, actualAutoCapa);
+                        Debug.Log("Je me suis mis: " + actualAutoCapa);
+                        ActionFaite();
+                        mode = Mode.Aucun;
+
+                    }
+                    else
+                    {
+                        //Grise le bouton est on emèche d'appuyer dessus
+                        mode = Mode.Aucun;
+                    }
+
+
+                    
+
+                }
+
+
+
+                    break;
 
             default:
                 break;
 
         }
+
+
     }
 
 
