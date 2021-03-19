@@ -11,11 +11,13 @@ public class Scr_MovePositions : MonoBehaviour
 
     public Transform[] pos;
 
+    public Scr_PositionsManager posManager;
+
     private void Awake()
     {
-        
-        
-        
+
+      
+
     }
 
 
@@ -23,16 +25,21 @@ public class Scr_MovePositions : MonoBehaviour
     {
         //Get le bloc de position, puis get le bloc de positions en fonction de qui il est, puis on set toutes les pos avec les pos du bloc 
         pos = positions;
-        owner.transform.position = new Vector3(pos[0].transform.position.x, owner.transform.position.y, owner.transform.position.z);
-        MoveToPosition(pos[0]);
+        //owner.transform.position = new Vector3(pos[0].transform.position.x, owner.transform.position.y, owner.transform.position.z);
+        int i = Random.Range(0, 4);
+        MoveToPosition(pos[i]);
     }
-
+  
 
     public void MoveToPosition(Transform pos)
     {
-        actualPosition = pos;
-        owner.transform.position = new Vector3(pos.transform.position.x, owner.transform.position.y, pos.transform.position.z+1);
-        Debug.Log("Move");
+        if (actualPosition != pos)
+        {
+            actualPosition = pos;
+            owner.transform.position = new Vector3(pos.transform.position.x, owner.transform.position.y, pos.transform.position.z + 1);
+            Debug.Log("Move");
+        }
+        
     }
 
 

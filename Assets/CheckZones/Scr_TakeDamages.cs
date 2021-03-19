@@ -31,7 +31,7 @@ public class Scr_TakeDamages : MonoBehaviour
 
     public void Dead()
     {
-        Debug.Log("Dead");
+        Debug.LogError(name + " est mort");
     }
 
     public void Turn()

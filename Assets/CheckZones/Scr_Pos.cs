@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Scr_Pos : MonoBehaviour
 {
+    public bool occupied;
+
 
     public Transform Cliqued()
     {

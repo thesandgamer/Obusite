@@ -23,6 +23,16 @@ public class Scr_Effets : MonoBehaviour
         Debug.Log("Gain moral : " + value);
     }
 
+    public void Viser()
+    {
+        Debug.Log("Viser");
+    }
+
+    public void PerteEsquive(int value)
+    {
+        Debug.Log("Perte de " + value + " d'esquive ");
+    }
+
 
 
 }

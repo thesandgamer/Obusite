@@ -42,11 +42,18 @@ public class Scr_TurnManager : MonoBehaviour
 
         //on instancie le ForCombat
         var position = Instantiate(positionGameObject, positionPos.position , Quaternion.identity);
-        //on replace les ennemis sur les pos
+
+        //Replace le player
         player.transform.GetChild(1).gameObject.GetComponent<Scr_MovePositions>().SetPos(position.GetComponent<Scr_PositionsManager>().playerPositions);
-        enemy[0].GetComponent<Scr_MovePositions>().SetPos(position.GetComponent<Scr_PositionsManager>().ennemiPositions);
+
+        //on replace les ennemis sur les pos
+        for (int i =0; i < enemy.Length; i++)
+        {
+            enemy[i].GetComponent<Scr_MovePositions>().SetPos(position.GetComponent<Scr_PositionsManager>().ennemiPositions);
+        }
         //Active l'Ui
         battleUi.SetActive(true);
+
         //Desactive l'encounter
         var collide = transform.parent.gameObject.GetComponent<SphereCollider>();
         collide.enabled = false;

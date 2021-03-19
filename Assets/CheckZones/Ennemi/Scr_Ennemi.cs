@@ -22,7 +22,6 @@ public class Scr_Ennemi : MonoBehaviour
 
 
 
-
     public void Turn()
     {
         ai.Move();

@@ -22,10 +22,25 @@ public class Scr_EnnemiAi : MonoBehaviour
 
     public void Move()
     {
-        int i = Random.Range(0, 4);
+
         //Détecter où on est 
+
+        //Prendre un numéro au pif
+        int i = Random.Range(0, 4);
         //Prendre un autre numéro si le numéro est le même que là où on est
+        i = Random.Range(0, 4);
+        //Déplacer à la position du numéro
         posManager.MoveToPosition(posManager.pos[i]);
+
+        if (posManager.actualPosition != posManager.pos[i])
+        {
+            
+        }
+
+
+
+
+
     }
 
     public void ChooseCapa()

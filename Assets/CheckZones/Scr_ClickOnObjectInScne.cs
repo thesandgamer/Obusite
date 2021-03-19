@@ -114,9 +114,10 @@ public class Scr_ClickOnObjectInScne : MonoBehaviour
                 break;
 
             case 1:
-                    actualAutoCapa = dataBase.AutoCapa[capaciteManager.capacite[capaDizaines].intCapa].autoCapa[capaUnites];
+                //Erreur: il lit le int capa de la capacité 0, du coup il faut bien séparer les attack capa des auto capa
+                    actualAutoCapa = dataBase.AutoCapa[capaciteManager.autoCapacite[capaDizaines].intCapa].autoCapa[capaUnites];
                     actualCapa = null;
-                    Debug.Log("Capacité actuelle:  " + actualAutoCapa.name);
+                    Debug.Log("Capacité auto actuelle:  " + actualAutoCapa.name);
                 break;
                 
                 
