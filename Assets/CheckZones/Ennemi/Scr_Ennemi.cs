@@ -7,11 +7,8 @@ public class Scr_Ennemi : MonoBehaviour
     private Scr_TurnManager turnmanager;
     private Scr_EnnemiAi ai;
 
-    public int esquive = 5;
+    public bool turnFinish;
 
-    public int pv = 10;
-
-    public int absorbance = 0;
 
     private void Awake()
     {
@@ -20,12 +17,26 @@ public class Scr_Ennemi : MonoBehaviour
     }
 
 
+    public void CheckMoral()
+    {
+        int moral = GetComponent<Scr_TakeDamages>().moral;
+        if (moral <= 0)
+        {
+            //Fuit le combat: x% chances de fuir ou fuite forcément?
+            Fuite();
+        }
+    }
 
+    public void Fuite()
+    {
+
+    }
 
     public void Turn()
     {
-        ai.Move();
-        turnmanager.EnemyEndTurn();
+        ai.Attack();
+        //turnmanager.EnemyEndTurn();
+        turnFinish = true;
     }
 
 

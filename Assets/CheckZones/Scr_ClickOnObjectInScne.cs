@@ -31,6 +31,7 @@ public class Scr_ClickOnObjectInScne : MonoBehaviour
     private Scr_Capa capaciteManager;
     private Scr_Player playerManager;
     public Scr_CapaDataBase dataBase;
+    private Scr_TakeDamages takeDamage;
 
     private int actionsMax = 2;
     private int actionsRestantes;
@@ -48,6 +49,7 @@ public class Scr_ClickOnObjectInScne : MonoBehaviour
         capaciteManager = GetComponent<Scr_Capa>();
         posManager = GetComponent<Scr_MovePositions>();
         playerManager = GetComponent<Scr_Player>();
+        takeDamage = GetComponent<Scr_TakeDamages>();
         mode = Mode.Aucun;
     }
 
@@ -182,7 +184,7 @@ public class Scr_ClickOnObjectInScne : MonoBehaviour
                     }
 
                     bool moralValide = false;
-                    if (playerManager.moral >= actualCapa.moralRequire)
+                    if (takeDamage.moral >= actualCapa.moralRequire)
                     {
                         moralValide = true;
                     }
@@ -211,7 +213,7 @@ public class Scr_ClickOnObjectInScne : MonoBehaviour
                 {
 
                     bool moralValide = false;
-                    if (playerManager.moral >= actualAutoCapa.moralRequire)
+                    if (takeDamage.moral >= actualAutoCapa.moralRequire)
                     {
                         moralValide = true;
                     }
@@ -219,8 +221,7 @@ public class Scr_ClickOnObjectInScne : MonoBehaviour
 
                     if (moralValide)
                     {
-                        attaqueManager.CalculateIfTouch(hitObject.gameObject, actualAutoCapa);
-                        Debug.Log("Je me suis mis: " + actualAutoCapa);
+                        attaqueManager.CalculateIfTouch(hitObject, actualAutoCapa);
                         ActionFaite();
                         mode = Mode.Aucun;
 

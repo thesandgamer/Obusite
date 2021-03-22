@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum BattleState { START, PLAYERTURN,ENEMYTURN,WON,TURN }
+public enum BattleState { START, PLAYERTURN,ENEMYTURN,END,TURN }
 
 public class Scr_TurnManager : MonoBehaviour
 {
@@ -26,7 +26,11 @@ public class Scr_TurnManager : MonoBehaviour
     {
         battleCamera.enabled = false;
     }
-
+    private void Update()
+    {
+        CheckIfEnnemiMakeTurn();
+        CheckIfEnnemiIsAlive();
+    }
 
     public void SetupBattle()
     {
@@ -49,7 +53,7 @@ public class Scr_TurnManager : MonoBehaviour
         //on replace les ennemis sur les pos
         for (int i =0; i < enemy.Length; i++)
         {
-            enemy[i].GetComponent<Scr_MovePositions>().SetPos(position.GetComponent<Scr_PositionsManager>().ennemiPositions);
+            enemy[i].GetComponent<Scr_MovePositions>().MoveToPosition(position.GetComponent<Scr_PositionsManager>().ennemiPositions[i]);
         }
         //Active l'Ui
         battleUi.SetActive(true);
@@ -65,8 +69,12 @@ public class Scr_TurnManager : MonoBehaviour
 
     public void EnnemyTurn()
     {
-        enemy[0].GetComponent<Scr_Ennemi>().Turn();
-        enemy[0].GetComponent<Scr_TakeDamages>().Turn();
+        for (int i = 0; i < enemy.Length; i++)
+        {
+            Debug.Log("Ennemi: " + enemy[i] + " turn");
+            enemy[i].GetComponent<Scr_Ennemi>().Turn();
+            enemy[i].GetComponent<Scr_TakeDamages>().Turn();
+        }
     }
 
     public void PlayerTurn()
@@ -91,5 +99,53 @@ public class Scr_TurnManager : MonoBehaviour
         PlayerTurn();
 
     }
+
+    int turnConteur = 0;
+    public void CheckIfEnnemiMakeTurn()
+    {
+        for (int i = 0; i < enemy.Length; i++)
+        {
+            if (enemy[i].GetComponent<Scr_Ennemi>().turnFinish)
+            {
+                turnConteur++;
+            }
+            if (turnConteur == enemy.Length)
+            {
+                Debug.LogError("Les ennemis ont fait leur tour");
+                enemy[i].GetComponent<Scr_Ennemi>().turnFinish = false;
+                turnConteur = 0;
+                EnemyEndTurn();
+                break;
+            }
+        }
+
+    }
+
+    int conteur = 0;
+    public void CheckIfEnnemiIsAlive()
+    {
+        
+
+        for (int i = 0; i < enemy.Length; i++)
+        {
+            if (enemy[i].GetComponent<Scr_TakeDamages>().dead)
+            {
+                conteur++;
+            }
+            if (conteur == enemy.Length)
+            {
+                CombatEnd();
+                break;
+            }
+        }
+
+    }
+
+    public void CombatEnd()
+    {
+        Debug.Log("COMBAT END");
+        state = BattleState.END;
+    }
+
 
 }

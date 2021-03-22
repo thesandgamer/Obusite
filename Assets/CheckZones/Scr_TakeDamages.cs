@@ -5,22 +5,52 @@ using UnityEngine;
 public class Scr_TakeDamages : MonoBehaviour
 {
 
-    public int pv = 10;
-    public int esquive = 5;
-    public int absorbance = 0;
+    [Header("Base")]
+    public int basePv = 10;
+    public int baseEsquive = 5;
+    public int baseAbsorbance = 0;
+    private int moralMax = 20;
 
+    [HideInInspector] public int pv;
+    [HideInInspector] public int esquive;
+    [HideInInspector] public int absorbance;
+    public int moral = 10;
 
     public bool saignement = false;
-    public int dureeSaignement;
+    [HideInInspector] public int dureeSaignement;
+    public bool stun = false;
+    public bool dead = false;
 
+    private Scr_Attaque attaqueManager;
 
-    public void TakeDamages(int damages)
+    public void Start()
+    {
+        pv = basePv;
+        esquive = baseEsquive;
+        absorbance = baseAbsorbance;
+        attaqueManager = GetComponent<Scr_Attaque>();
+    }
+
+    public void TakeDamages(int damages,string part)
     {
         if (pv > 0)
         {
-            pv -= damages - absorbance;
+            int damageTaken = damages;
+            switch (part)
+            {
+                case "Head":
+                    pv -= damages - absorbance;
+                    damageTaken = damages - absorbance;
+                    break;
+                case "Torso":
+                    pv -= damages - absorbance + 2;
+                    damageTaken = damages - absorbance+2;
+                    break;
+
+            }
+            
             Debug.Log("PV = " + pv);
-            if (damages - absorbance > pv)
+            if (damageTaken > pv)
             {
                 Dead();
             }
@@ -34,8 +64,10 @@ public class Scr_TakeDamages : MonoBehaviour
         Debug.LogError(name + " est mort");
     }
 
+
     public void Turn()
     {
+        ResetValue();
         if (saignement)
         {
             if (dureeSaignement >0)
@@ -60,6 +92,20 @@ public class Scr_TakeDamages : MonoBehaviour
         dureeSaignement = durée;
     }
 
+
+    public void Stun()
+    {
+        stun = true;
+    }
+
+    public void ResetValue()
+    {
+        stun = false;
+        esquive = baseEsquive;
+        absorbance = baseAbsorbance;
+        attaqueManager.modificateurValue = 0;
+
+    }
 
 
 

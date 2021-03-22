@@ -9,6 +9,8 @@ public class Scr_Attaque : MonoBehaviour
     int actualPosition;
     private Scr_Effets effets;
 
+    [HideInInspector] public int modificateurValue;
+
     private void Start()
     {
         posScript = GetComponent<Scr_MovePositions>();
@@ -55,6 +57,8 @@ public class Scr_Attaque : MonoBehaviour
             }
         }
 
+        Debug.Log("Valeur avant mofif: " + value);
+
         //Modifie la Touche en fonction de la position si elle à un modificateur
         value -= capacite.modifPortee[actualPosition];
 
@@ -64,6 +68,7 @@ public class Scr_Attaque : MonoBehaviour
         {
             case "Head":
                 Debug.Log("Tête touchée");
+                value -= 5;
                 break;
             case "Torso":
                 Debug.Log("Torce touchée");
@@ -71,10 +76,13 @@ public class Scr_Attaque : MonoBehaviour
 
         }
 
+        value += modificateurValue;
+        Debug.Log("Valeur après mofif: " + value);
+
         //Modifie la chance de saignement/... en fonction de la partie
         if (value <= toReach)
         {   
-            opponent.GetComponent<Scr_TakeDamages>().TakeDamages(Random.Range(capacite.degats[0], capacite.degats[1]));
+            opponent.GetComponent<Scr_TakeDamages>().TakeDamages(Random.Range(capacite.degats[0], capacite.degats[1]), part);
             effets.cible = opponent;
             capacite.effet.Invoke();
         }
